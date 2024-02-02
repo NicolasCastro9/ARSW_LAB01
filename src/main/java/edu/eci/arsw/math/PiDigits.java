@@ -110,4 +110,57 @@ public class PiDigits {
         return result;
     }
 
+    /**
+ * Retorna un rango de dígitos hexadecimales de pi, paralelizando el cálculo mediante múltiples hilos.
+ * 
+ * @param start La posición inicial del rango.
+ * @param count El número de dígitos a retornar.
+ * @param n El número de hilos a utilizar para la paralelización.
+ * @return Un array que contiene los dígitos hexadecimales.
+ * @throws InterruptedException Si alguno de los hilos es interrumpido durante la ejecución.
+ * @throws IllegalArgumentException Si los parámetros son inválidos (start, count, o n son negativos).
+ */
+    public static byte[] getDigits(int start, int count, int n) throws InterruptedException {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Invalid parameters");
+        }
+        if (start < 0) {
+            throw new RuntimeException("Invalid Interval");
+        }
+
+        if (count < 0) {
+            throw new RuntimeException("Invalid Interval");
+        }
+
+        byte[] result = new byte[count];
+        Thread[] threads = new Thread[n];
+        int size = count / n; // Calcula el tamaño de lote que cada hilo deberá calcular
+
+        // Bucle para crear y ejecutar hilos
+        for (int i = 0; i < n; i++) {
+            int threadStart = start + i * size;
+            int threadCount = (i == n - 1) ? (count - i * size) : size;
+
+            PiDigitThread PiDigitThread = new PiDigitThread(threadStart, threadCount);
+            threads[i] = PiDigitThread;
+            PiDigitThread.start();
+        }
+        // Bucle para esperar a que todos los hilos terminen
+        for (Thread thread : threads) {
+            thread.join();
+        }
+        // Combina los resultados de los hilos
+        int currentIndex = 0;
+        for (int i = 0; i < n; i++) {
+            PiDigitThread PiDigitThread = (PiDigitThread) threads[i];
+            byte[] threadResult = PiDigitThread.getResult();
+            System.arraycopy(threadResult, 0, result, currentIndex, threadResult.length);
+            currentIndex += threadResult.length;
+        }
+
+        return result;
+    }
+
+
+
 }
