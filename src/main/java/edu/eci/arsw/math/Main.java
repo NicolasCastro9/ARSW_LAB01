@@ -14,14 +14,60 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String args[]) throws InterruptedException {
+        // System.out.println(""+Runtime.getRuntime().availableProcessors());
 
         // System.out.println(bytesToHex(PiDigits.getDigits(0, 10)));
         // System.out.println(bytesToHex(PiDigits.getDigits(1, 100)));
         // System.out.println(bytesToHex(PiDigits.getDigits(1, 100000)));
 
-        System.out.println(bytesToHex(PiDigits.getDigits(0, 10,4)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 100,4)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 100000,4)));
+        // System.out.println(bytesToHex(PiDigits.getDigits(0, 10,4)));
+        // System.out.println(bytesToHex(PiDigits.getDigits(1, 100,4)));
+        // System.out.println(bytesToHex(PiDigits.getDigits(1, 100000,4)));
+
+        // 1 hilo
+        // long start = System.currentTimeMillis();
+        // System.out.println(bytesToHex(PiDigits.getDigits(0, 100000,1)));
+        // long end = System.currentTimeMillis();
+        // double time = (end - start);
+        // System.out.println("Time: " + time);
+        // System.out.println("Tiempo de ejecución (1 hilo): " + (end - start) + " milisegundos");
+
+
+        // 8 hilos
+        // long start = System.currentTimeMillis();
+        // System.out.println(bytesToHex(PiDigits.getDigits(0, 100000,8)));
+        // long end = System.currentTimeMillis();
+        // double time = (end - start);
+        // System.out.println("Time: " + time);
+        // System.out.println("Tiempo de ejecución (8 hilos): " + (end - start) + " milisegundos");
+
+        // 16 hilos
+        // long start = System.currentTimeMillis();
+        // System.out.println(bytesToHex(PiDigits.getDigits(0, 100000,16)));
+        // long end = System.currentTimeMillis();
+        // double time = (end - start);
+        // System.out.println("Time: " + time);
+        // System.out.println("Tiempo de ejecución (16 hilos): " + (end - start) + " milisegundos");
+
+
+        // 200 hilos
+        // long start = System.currentTimeMillis();
+        // System.out.println(bytesToHex(PiDigits.getDigits(0, 100000,200)));
+        // long end = System.currentTimeMillis();
+        // double time = (end - start);
+        // System.out.println("Time: " + time);
+        // System.out.println("Tiempo de ejecución (200 hilos): " + (end - start) + " milisegundos");
+
+
+        // 500 hilos
+        long start = System.currentTimeMillis();
+        System.out.println(bytesToHex(PiDigits.getDigits(0, 100000,500)));
+        long end = System.currentTimeMillis();
+        double time = (end - start);
+        System.out.println("Time: " + time);
+        System.out.println("Tiempo de ejecución (500 hilos): " + (end - start) + " milisegundos");
+        
+        
         
     }
 
